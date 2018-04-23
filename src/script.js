@@ -2,8 +2,6 @@
 let updateContactInfo = false;
 let confirmDelete = false;
 let idOfSelectedContact;
-// implement persistent with localStorage
-// localStorage.removeItem('addressBook')
 
 const Contacts = class {
  	static newEvent(elementObject,  eventType, callBack, callBackArgument) {
@@ -61,15 +59,14 @@ const Contacts = class {
   static closeContactInfo() {
     if(document.getElementById('show-contact-info')) {
       const showContactInfo = document.getElementById('show-contact-info');
-      if(document.getElementById('contact-info-table')) {
-        const contactInfoTable = document.getElementById('contact-info-table');
+      if(document.getElementById('contact-info-container')) {
+        const contactInfoTable = document.getElementById('contact-info-container');
         showContactInfo.removeChild(contactInfoTable);
       }  
     }
   }
 
   static closeErrorBox() {
-    console.log('woah')
     if(document.getElementById('error-box')) {
       const errorBox = document.getElementById('error-box');
       errorBox.setAttribute('class', 'hide-item');
@@ -105,6 +102,14 @@ const Contacts = class {
       phone.value = selectedConctact['phone'];
     }
     updateContactInfo = true;
+
+    if(document.getElementById('show-contact-info')) {
+      const showContactInfo = document.getElementById('show-contact-info');
+      if(document.getElementById('contact-info-container')) {
+        const contactInfoContainer = document.getElementById('contact-info-container');
+        showContactInfo.removeChild(contactInfoContainer);
+      }  
+    }
   }
 
   static deleteContact(idOfSelectedContact) {
@@ -124,23 +129,22 @@ const Contacts = class {
       displayContactList();
       if(document.getElementById('show-contact-info')) {
         const showContactInfo = document.getElementById('show-contact-info');
-        if(document.getElementById('contact-info-table')) {
-          const contactInfoTable = document.getElementById('contact-info-table');
-          showContactInfo.removeChild(contactInfoTable);
+        if(document.getElementById('contact-info-container')) {
+          const contactInfoContainer = document.getElementById('contact-info-container');
+          showContactInfo.removeChild(contactInfoContainer);
         }  
       }
     }
   }
 } // end class definition 
- // const contacts = new Contacts();
 
 function saveAddressBook() {
   if(!localStorage.getItem('addressBook')) {
     let listOfContacts = [];
-    const confirmStorage = confirm('Allow this program to store my contacts on this browser');
+    const confirmStorage = true;
     listOfContacts = JSON.stringify(listOfContacts);
     if(confirmStorage) {
-      console.log('system store contacts on the browsers localStorage');
+      console.log('System store contacts on the browsers localStorage');
       localStorage.setItem('addressBook', listOfContacts);
     }
   } else if(localStorage.getItem('addressBook')) {
@@ -153,11 +157,7 @@ function saveAddressBook() {
 displayContactList();
 
 function addContact() {
-  let listOfContacts;
-  if(localStorage.getItem('addressBook')) {
-    listOfContacts = localStorage.getItem('addressBook');
-    listOfContacts = JSON.parse(listOfContacts);
-  }
+  let listOfContacts = getContactFromStore(); 
   let contactId;
   const newContact = {};
   if(updateContactInfo) {
@@ -178,36 +178,42 @@ function addContact() {
     const fullname = fullnameInput.value;
     if(typeof fullname === 'string' && fullname.length >= 1) {
       newContact['fullname'] = fullname;
-      fullnameInput.value = '';
     } else {
       console.log('names must be aphabetical characters')
     } 
+    fullnameInput.value = '';
   }
 
   if(document.getElementById('address')) {
     const addressInput = document.getElementById('address');
     const address = addressInput.value;
-    if(typeof address === 'string' && address.length >= 1 ) {
-      newContact['address'] = address;
-      addressInput.value = '';
-    } else {
-      console.log('address must be aphabetical characters')
+    if(address) {
+      if(typeof address === 'string' && address.length >= 1 ) {
+        newContact['address'] = address;
+      } else {
+        console.log('address must be aphabetical characters')
+      }
     }
+    newContact['address'] = address;
+    addressInput.value = '';
   }
 
   if(document.getElementById('email')) {
     const emailInput = document.getElementById('email');
     const email = emailInput.value;
     // accept only valid email
-    const emailRegExp = /\w+@\w+\.(net|com|org)/;
-    const validEmail = emailRegExp.test(email)
-    if(validEmail) {
-      newContact['email'] = email;
-      emailInput.value = '';
-    } else {
-      displayErrorMessage('Invalid Email');
-      return;
+    if(email) {
+      const emailRegExp = /\w+@\w+\.(net|com|org)/;
+      const validEmail = emailRegExp.test(email)
+      if(validEmail) {
+        newContact['email'] = email;
+      } else {
+        displayErrorMessage('Invalid Email');
+        return;
+      }
     }
+    newContact['email'] = email;
+    emailInput.value = '';
   }
 
   if(document.getElementById('phone')) {
@@ -215,12 +221,15 @@ function addContact() {
     const phone = phoneInput.value;
     const lengthOfPhoneNum = phone.length;
     const phoneNumber = parseInt(phone, 10);
-    if((typeof phoneNumber === 'number') && (lengthOfPhoneNum === 11)) {
-      newContact['phone'] = phone;
-      phoneInput.value = '';
-    } else {
-      console.log('invalid phone number');
+    if(phone) {
+      if((typeof phoneNumber === 'number') && (lengthOfPhoneNum === 11)) {
+        newContact['phone'] = phone;
+      } else {
+        console.log('invalid phone number');
+      }
     }
+    newContact['phone'] = phone;
+    phoneInput.value = '';
   }
 
   if(newContact['fullname'] && newContact['address'] || newContact['email'] || newContact['phone']) {
@@ -234,11 +243,10 @@ function addContact() {
       listOfContacts.push(newContact);
     }
 
-    listOfContacts = JSON.stringify(listOfContacts)
-    localStorage.setItem('addressBook', listOfContacts);
+    saveContactsToStore(listOfContacts); 
     displayContactList(listOfContacts);
   } else {
-    displayErrorMessage('you must start a name and any of address, email, phone');
+    displayErrorMessage('You must include a name and any/ all of address, email, phone to save');
     return;
   }
 } // end addContact

@@ -1,0 +1,169 @@
+
+body {
+	font-family:arial;
+}
+
+button {
+	border-style:none;
+	color:#ffffff;
+	font-weight:bold;
+	padding:4px 14px;
+	margin:2px;
+}
+
+dl > dd {
+	font-style:italic;
+}
+dl > dt {
+	font-weight:bold;
+}
+
+.container {
+	width:500px;
+	background-color:#faf3ed;
+	border:solid #000000 1px;
+	border-right:solid #000000 2px;
+	border-bottom:solid #000000 2px;
+	padding-bottom:5px;
+}
+
+#app-title {
+	background-color:#e3a662;
+	height:40px;
+	text-align:center;
+	padding-top:20px;
+	position:relative;
+	top:-20px;
+}
+.hide-item {
+	display:none;
+}
+
+.show-item {
+	display:block;
+}
+
+.contact-items {
+	list-style-type:none;
+}
+
+#add-contact {
+	background-color:#28a745;
+}
+
+#update-contact {
+background-color:#007bff;
+}
+
+#delete-contact {
+	background-color:#dc3545;
+}
+#close-error-message, #close-contact-info {
+	background-color:#dc3545;
+}
+
+#error-box {
+	background-color:#f3f3f3;
+	width:400px;
+	height:95px;
+	position:fixed;
+	top:15px;
+	left:90px;
+	border:solid red 1px;
+	border-right:solid red 2px;
+	border-bottom:solid red 2px;
+	padding:4px;
+}
+
+#close-error-message {
+	position:relative;
+	left:84%;
+	bottom:-72px;
+	margin-left:1px;
+}
+
+#message-text {
+	position:relative;
+	top:-40px;
+}
+
+#contact-list {
+	padding:2px;
+	margin:3px 2px;
+}
+
+#contact-list-title {
+	margin:2px;
+}
+
+#contact-info-container, #add-address-div {
+	background:rgba(0, 0, 0, 0.1);
+	width:250px;
+	border:solid 1px #e3a662;
+	border-right:solid 2px #e3a662;
+	border-bottom:solid 2px #e3a662;
+	padding-left:5px;
+	padding-bottom:5px;
+	margin-bottom:20px;
+	border-radius:2%;
+	text-overflow:wrap;
+}
+
+#close-contact-info {
+	position:relative;
+	left:82%;
+}
+
+#address-list, #show-contact-info, #add-address-div {
+	margin-left:10px;
+}
+
+.input-label {
+	margin-top:10px;
+}
+
+.input-field {
+	margin:2px 2px 7px 2px;
+	height:25px;
+	border-radius:2%;
+	border:solid #000000 1px;
+}
+
+/* style for targetted device width */
+@media only screen and (min-width:520px) {
+	.container {
+		position:relative;
+		left:10%;
+	}
+	#show-contact-info {
+		position:absolute;
+		left:220px;
+		top:135px;
+	}
+}
+
+@media only screen and (max-width:520px) {
+	/** small size screen **/
+	#close-contact-info {
+		position:relative;
+		left:79%;
+	}
+
+	.container {
+		width:100%;
+	}
+
+	#contact-info-container, #add-address-div {
+		width:200px;
+			text-overflow:wrap;
+	}
+
+	#error-box {
+		width:200px;
+		left:12px;
+	}
+
+	#close-error-message {
+		left:68%;
+	}
+}

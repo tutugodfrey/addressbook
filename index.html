@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel = 'stylesheet' type = 'style/css' href = './style.css' />
+		<link rel = 'stylesheet' type = 'text/css' href = 'style.css' />
 		<title>
 			Address Book
 		</title>
 	</head>
 	<body>
 		<div class = 'container'>
-			<div id = 'error-box'>
-				<button id = 'close-error-message'>X</button>
-			</div>
 			<h1 id = 'app-title'>
 				Address Book
 			</h1>
+			<div id = 'error-box' class = 'hide-item'>
+				<button id = 'close-error-message'>Close</button>
+			</div>
 			<div id = 'address-list'>
 			</div>
 			<div id = 'show-contact-info'>
@@ -23,15 +23,15 @@
 					<h3>
 						Add Contact
 					</h3>
-					<label id = 'fullname-label' class = 'input-label'>Fullname</label><br />
-					<input type = 'text' id = 'fullname' name = 'fullname' /><br />
-					<label id = 'fullname-label' class = 'input-label'>Address</label><br />
-					<input type = 'text' id = 'address' name = 'address' /><br />
-					<label id = 'fullname-label' class = 'input-label'>Email</label><br />
-					<input type = 'text' id = 'email' name = 'email' placeholder= 'you@example.com' /><br />
-					<label id = 'fullname-label' class = 'input-label'>Phone</label><br />
-					<input type = 'text' id = 'phone' name = 'phone' /><br />
-					<input type = 'button' id = 'add-contact' name = 'add' value = 'Save Contact' />
+					<label for = 'fullname' id = 'fullname-label' class = 'input-label'>Fullname</label><br />
+					<input type = 'text' id = 'fullname' class = 'input-field' /><br />
+					<label for = 'address' id = 'fullname-label' class = 'input-label'>Address</label><br />
+					<input type = 'text' id = 'address' class = 'input-field' /><br />
+					<label for = 'email' id = 'fullname-label' class = 'input-label'>Email</label><br />
+					<input type = 'text' id = 'email' class = 'input-field' placeholder= 'you@example.com' /><br />
+					<label for = 'phone' id = 'phone-label' class = 'input-label'>Phone</label><br />
+					<input type = 'text' id = 'phone' class = 'input-field' /><br />
+					<button id = 'add-contact'>Save Contact</button>
 				</form>
 			</div>
 		</div>
