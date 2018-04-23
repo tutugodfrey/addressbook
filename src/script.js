@@ -68,6 +68,14 @@ const Contacts = class {
     }
   }
 
+  static closeErrorBox() {
+    console.log('woah')
+    if(document.getElementById('error-box')) {
+      const errorBox = document.getElementById('error-box');
+      errorBox.setAttribute('class', 'hide-item');
+    }
+  }
+
   static updateContact(idOfSelectedContact) {
     const listOfContacts = getContactFromStore();
     let selectedConctact;
@@ -197,7 +205,8 @@ function addContact() {
       newContact['email'] = email;
       emailInput.value = '';
     } else {
-      console.log('invalid Email');
+      displayErrorMessage('Invalid Email');
+      return;
     }
   }
 
@@ -229,8 +238,8 @@ function addContact() {
     localStorage.setItem('addressBook', listOfContacts);
     displayContactList(listOfContacts);
   } else {
-    console.log('you must start a name and any of address, email, phone');
-    console.log(newContact);
+    displayErrorMessage('you must start a name and any of address, email, phone');
+    return;
   }
 } // end addContact
 
@@ -395,6 +404,27 @@ function displayContactInfo(contactItem) {
   domNotifier();
 }
 
+function displayErrorMessage(message) {
+  if(document.getElementById('error-box')) {
+    const errorBox = document.getElementById('error-box');
+    const messageBody = document.createElement('p');
+    messageBody.id = 'message-text';
+    messageBody.innerHTML = message;
+    if(document.getElementById('message-text')) {
+      const messageText = document.getElementById('message-text');
+      errorBox.removeChild(messageText);
+      errorBox.appendChild(messageBody);
+    } else {
+      errorBox.appendChild(messageBody);
+    }
+
+    if(document.getElementById('error-box')) {
+      const errorBox = document.getElementById('error-box');
+      errorBox.setAttribute('class', 'show-item');
+      domNotifier();
+    }
+  }
+}
 function domNotifier() {
   if(document.getElementById('close-contact-info')) {
     const closeContactButton = document.getElementById('close-contact-info');
@@ -410,4 +440,9 @@ function domNotifier() {
     const deleteContactButton = document.getElementById('delete-contact');
     Contacts.newEvent(deleteContactButton, 'click', Contacts.deleteContact, idOfSelectedContact);
   }
+
+  if(document.getElementById('close-error-message')) {
+      const closeErrorButton = document.getElementById('close-error-message');
+       Contacts.newEvent(closeErrorButton, 'click', Contacts.closeErrorBox);
+    }
 }
