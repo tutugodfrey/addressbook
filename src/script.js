@@ -339,64 +339,58 @@ function displayContactInfo(contactItem) {
   deleteContact.id = 'delete-contact';
   deleteContact.innerHTML = 'Delete';
 
-  const table = document.createElement('table');
-  table.id = 'contact-info-table';
-  const tableRow = document.createElement('tr');
-  const tableHead = document.createElement('th');
-  const tableCell = document.createElement('td');
-  tableHead.innerHTML = fullname;
-  const contactTitle = tableRow;
-  contactTitle.appendChild(tableHead);
-  // table row for address
-  const addressRow = document.createElement('tr');
-  const addressField = document.createElement('td');
+  const InfoContainer = document.createElement('div');
+  InfoContainer.id = 'contact-info-container';
+  const contactTitle = document.createElement('h4');
+  contactTitle.innerHTML = fullname;
+
+  // item address
+  const descriptiveListContainer = document.createElement('dl');
+  const addressField = document.createElement('dt');
   addressField.innerHTML = 'Address:';
-  const addressValue = document.createElement('td');
+  const addressValue = document.createElement('dd');
   if(!address) {
     address = 'No address';
   }
   addressValue.innerHTML = address;
-  addressRow.appendChild(addressField);
-  addressRow.appendChild(addressValue);
+  descriptiveListContainer.appendChild(addressField);
+  descriptiveListContainer.appendChild(addressValue);
 
-  // table row for email
-  const emailRow = document.createElement('tr');
-  const emailField = document.createElement('td');
+  // item email
+  const emailField = document.createElement('dt');
   emailField.innerHTML = 'Email:';
-  const emailValue = document.createElement('td');
+  const emailValue = document.createElement('dd');
   if(!email) {
     email = 'No email';
   }
   emailValue.innerHTML = email;
-  emailRow.appendChild(emailField);
-  emailRow.appendChild(emailValue);
+  descriptiveListContainer.appendChild(emailField);
+  descriptiveListContainer.appendChild(emailValue);
 
-  // table row for phone
-  const phoneRow = document.createElement('tr');
-  const phoneField = document.createElement('td');
+  // item phone
+  const phoneRow = document.createElement('div');
+  const phoneField = document.createElement('dt');
   phoneField.innerHTML = 'Phone:';
-  const phoneValue = document.createElement('td');
+  const phoneValue = document.createElement('dd');
   if(!phone) {
     phone = 'No phone';
   }
   phoneValue.innerHTML = phone;
-  phoneRow.appendChild(phoneField);
-  phoneRow.appendChild(phoneValue); 
+  descriptiveListContainer.appendChild(phoneField);
+  descriptiveListContainer.appendChild(phoneValue); 
 
-  table.appendChild(closeContactInfo);
-  table.appendChild(contactTitle);
-  table.appendChild(addressRow);
-  table.appendChild(emailRow);
-  table.appendChild(phoneRow);
-  table.appendChild(updateContact);
-  table.appendChild(deleteContact);
+  InfoContainer.appendChild(closeContactInfo);
+  InfoContainer.appendChild(contactTitle);
+  InfoContainer.appendChild(descriptiveListContainer);
+  InfoContainer.appendChild(updateContact);
+  InfoContainer.appendChild(deleteContact);
 
-  if(document.getElementById('contact-info-table')) {
-  const contactInfoTable = document.getElementById('contact-info-table');
+  if(document.getElementById('contact-info-container')) {
+  const contactInfoTable = document.getElementById('contact-info-container');
   showContactInfo.removeChild(contactInfoTable);
-  showContactInfo.appendChild(table);
+  showContactInfo.appendChild(InfoContainer);
   } else {
-    showContactInfo.appendChild(table);
+    showContactInfo.appendChild(InfoContainer);
   } 
   domNotifier();
 }
