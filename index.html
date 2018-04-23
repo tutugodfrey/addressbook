@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = 'stylesheet' type = 'style/css' href = './style.css' />
+		<title>
+			Address Book
+		</title>
+	</head>
+	<body>
+		<div class = 'container'>
+			<h1 id = 'app-title'>
+				Address Book
+			</h1>
+			<div id = 'address-list'>
+			</div>
+			<div id = 'show-contact-info'>
+			</div>
+			<div id = 'add-address-div'>
+				<form id = 'address-form'>
+					<h3>
+						Add Contact
+					</h3>
+					<label id = 'fullname-label' class = 'input-label'>Fullname</label><br />
+					<input type = 'text' id = 'fullname' name = 'fullname' /><br />
+					<label id = 'fullname-label' class = 'input-label'>Address</label><br />
+					<input type = 'text' id = 'address' name = 'address' /><br />
+					<label id = 'fullname-label' class = 'input-label'>Email</label><br />
+					<input type = 'text' id = 'email' name = 'email' placeholder= 'you@example.com' /><br />
+					<label id = 'fullname-label' class = 'input-label'>Phone</label><br />
+					<input type = 'text' id = 'phone' name = 'phone' /><br />
+					<input type = 'button' id = 'add-contact' name = 'add' value = 'Save Contact' />
+				</form>
+			</div>
+		</div>
+		<script src = './src/script.js'></script>
+	</body>
+</html>
