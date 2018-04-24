@@ -240,7 +240,7 @@ function addContact() {
       listOfContacts[indexOfSelected] = newContact;
       updateContactInfo = false;
     } else {
-      listOfContacts.push(newContact);
+        listOfContacts.push(newContact);
     }
 
     saveContactsToStore(listOfContacts); 

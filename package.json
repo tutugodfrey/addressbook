@@ -1,7 +1,7 @@
 {
   "name": "studentclass",
   "version": "1.0.0",
-  "description": "studentclass in an oop implementation that model the method and behavior of stuents",
+  "description": "address book use to store contact information for user",
   "main": "index.js",
   "scripts": {
     "test": "mocha trans/test/",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tutugodfrey/StudentClass.git"
+    "url": "git+https://github.com/tutugodfrey/addessBook.git"
   },
   "keywords": [
     "js",
@@ -21,9 +21,9 @@
   "author": "Tutu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tutugodfrey/StudentClass/issues"
+    "url": "https://github.com/tutugodfrey/addressBook/issues"
   },
-  "homepage": "https://github.com/tutugodfrey/StudentClass#readme",
+  "homepage": "https://github.com/tutugodfrey/addressBook#readme",
   "dependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
